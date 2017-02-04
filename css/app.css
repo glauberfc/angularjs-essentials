@@ -1,0 +1,21 @@
+a {
+	text-decoration: none !important;
+	outline: none !important;
+}
+
+.selected {
+	background-color: #FAFAD2;
+}
+
+.ng-enter {
+	-webkit-transition: all 5s linear;
+	-moz-transition: all 5s linear;
+	-ms-transition: all 5s linear;
+	-o-transition: all 5s linear;
+	transition: all 5s linear;
+	opacity: 0;
+}
+
+.ng-enter-active {
+	opacity: 1;
+}

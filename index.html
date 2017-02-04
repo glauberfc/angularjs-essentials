@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!-- Declaring the ng-app -->
+<html ng-app="parking">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>[Packt] Parking</title>
+	<link rel="stylesheet" href="css/lib/bootstrap.min.css">
+	<link rel="stylesheet" href="css/lib/bootstrap-theme.css">
+	<link rel="stylesheet" href="css/app.css">
+
+	<script src="js/lib/angular.min.js"></script>
+	<script src="js/lib/angular-animate.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/controllers.js"></script>
+	<script src="js/directives.js"></script>
+</head>
+<!-- Attaching the view to the parkingCtrl -->
+<body ng-controller="parkingCtrl">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+
+				<h3 ng-bind="appTitle"></h3>
+
+				<alert topic="Something went wrong!">
+					You must inform the plate and the color of the car!
+				</alert>
+
+				<accordion>
+					<accordion-item title="MMM-8971">White - 10/10/2002 10:00</accordion-item>
+					<accordion-item title="MBD-8571">Black - 10/10/2002 10:00</accordion-item>
+					<accordion-item title="MMA-7871">Blue - 10/10/2002 10:00</accordion-item>
+				</accordion>
+
+
+				<table class="table" ng-show="cars.length > 0">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Plate</th>
+							<th>Color</th>
+							<th>Entrance</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- Iterating over the cars -->
+						<tr ng-repeat="car in cars" ng-class="{selected: car.selected}">
+							<td><input type="checkbox" ng-model="car.selected" /></td>
+							<td><span ng-bind="car.plate"></span></td>
+							<td><span ng-bind="car.color" ng-style="{color: car.color}"></span></td>
+							<td><span ng-bind="car.entrance"></span></td>
+						</tr>
+					</tbody>
+				</table>
+				<div ng-hide="cars.length > 0">The parking lot is empty</div>
+
+				<form action="" method="POST" class="form-inline" role="form">
+					<div class="form-group">
+						<div class="col-xs-4">
+							<label class="sr-only" for="">Park</label>
+							<!-- Binding the car object, with plate, to the scope -->
+							<input type="text" placeholder="What's the plate?" class="form-control" ng-model="car.plate">
+						</div>
+						<div class="col-xs-5">
+							<label class="sr-only">Colors</label>
+							<select 
+								class="form-control"
+								ng-model="car.color"
+								ng-options="color for color in colors">Pick a color</select>
+						</div>
+						<div class="col-xs-3">
+							<!-- Binding the park function to the click event -->
+							<button class="btn btn-success" type="button" ng-click="park(car)" ng-disabled="!car.plate || !car.color">Park</button>
+						</div>
+					</div>
+			
+				</form>
+				
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
