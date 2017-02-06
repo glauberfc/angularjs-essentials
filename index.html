@@ -24,9 +24,18 @@
 
 				<h3 ng-bind="appTitle"></h3>
 
-				<!-- <alert topic="Something went wrong!">
-					You must inform the plate and the color of the car!
-				</alert> -->
+				 <alert
+				 	ng-show="carForm.plateField.$dirty && carForm.plateField.$invalid" 
+				 	topic="Something went wrong!">
+					
+					<span ng-show="carForm.plateField.$error.required">
+						You must inform the plate of the car!
+					</span>
+
+					<span ng-show="carForm.plateField.$error.pattern">
+						The plate is invalid!
+					</span>
+				</alert>
 
 				<!-- <accordion>
 					<accordion-item title="MMM-8971">White - 10/10/2002 10:00</accordion-item>
@@ -102,11 +111,18 @@
 							type="text" 
 							class="form-control"
 							name="plateField"
-							ng-model="car.plate">
+							ng-model="car.plate"
+							ng-required="true"
+							ng-pattern="/[A-Z]{3}[0-9]{3,7}/" />
 					</div>
 				
 								
-					<!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+					 <button
+					 	type="button" 
+						class="btn btn-primary"
+					 	ng-click="park(car)"
+						ng-disabled="carForm.$invalid"
+						>Submit</button> 
 				</form>
 			</div>
 		</div>
