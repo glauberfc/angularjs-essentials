@@ -14,6 +14,7 @@
 	<script src="js/app.js"></script>
 	<script src="js/controllers.js"></script>
 	<script src="js/directives.js"></script>
+	<script src="js/filters.js"></script>
 </head>
 <!-- Attaching the view to the parkingCtrl -->
 <body ng-controller="parkingCtrl">
@@ -23,43 +24,56 @@
 
 				<h3 ng-bind="appTitle"></h3>
 
-				<alert topic="Something went wrong!">
+				<!-- <alert topic="Something went wrong!">
 					You must inform the plate and the color of the car!
-				</alert>
+				</alert> -->
 
-				<accordion>
+				<!-- <accordion>
 					<accordion-item title="MMM-8971">White - 10/10/2002 10:00</accordion-item>
 					<accordion-item title="MBD-8571">Black - 10/10/2002 10:00</accordion-item>
 					<accordion-item title="MMA-7871">Blue - 10/10/2002 10:00</accordion-item>
-				</accordion>
+				</accordion> -->
 
+
+				<input type="text" ng-model="criteria" placeholder="What are you loking for?" />
 
 				<table class="table" ng-show="cars.length > 0">
 					<thead>
 						<tr>
 							<th></th>
-							<th>Plate</th>
-							<th>Color</th>
-							<th>Entrance</th>
+							<th>
+								<a href=""ng-click="field = 'plate'; order=!order">
+									Plate
+								</a>
+							</th>
+							<th>
+								<a href=""ng-click="field = 'color'; order=!order">
+									Color
+								</a>
+							</th>
+							<th>
+								<a href=""ng-click="field = 'entrance'; order=!order">
+									Entrance
+								</a>
+							</th>
 						</tr>
 					</thead>
 					<tbody>
 						<!-- Iterating over the cars -->
-						<tr ng-repeat="car in cars" ng-class="{selected: car.selected}">
+						<tr ng-repeat="car in cars | filter:criteria | orderBy:field:order" ng-class="{selected: car.selected}">
 							<td><input type="checkbox" ng-model="car.selected" /></td>
 							<td><span ng-bind="car.plate"></span></td>
 							<td><span ng-bind="car.color" ng-style="{color: car.color}"></span></td>
-							<td><span ng-bind="car.entrance"></span></td>
+							<td><span ng-bind="car.entrance | date:'dd/MM/yyyy hh:mm'"></span></td>
 						</tr>
 					</tbody>
 				</table>
 				<div ng-hide="cars.length > 0">The parking lot is empty</div>
 
-				<form action="" method="POST" class="form-inline" role="form">
+				<!-- <form action="" method="POST" class="form-inline" role="form">
 					<div class="form-group">
 						<div class="col-xs-4">
 							<label class="sr-only" for="">Park</label>
-							<!-- Binding the car object, with plate, to the scope -->
 							<input type="text" placeholder="What's the plate?" class="form-control" ng-model="car.plate">
 						</div>
 						<div class="col-xs-5">
@@ -70,13 +84,30 @@
 								ng-options="color for color in colors">Pick a color</select>
 						</div>
 						<div class="col-xs-3">
-							<!-- Binding the park function to the click event -->
 							<button class="btn btn-success" type="button" ng-click="park(car)" ng-disabled="!car.plate || !car.color">Park</button>
 						</div>
 					</div>
 			
-				</form>
+				</form> -->
+				<br/><br/><br/><br/><br/>
 				
+				<form name="carForm" action="" method="POST" class="form-inline" role="form">
+					<div class="form-group">
+						<legend>Form title</legend>
+					</div>
+
+					<div class="form-group">
+						<label class="sr-only" for="">What's the plate?</label>
+						<input 
+							type="text" 
+							class="form-control"
+							name="plateField"
+							ng-model="car.plate">
+					</div>
+				
+								
+					<!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+				</form>
 			</div>
 		</div>
 	</div>
