@@ -24,26 +24,6 @@
 
 				<h3 ng-bind="appTitle"></h3>
 
-				 <alert
-				 	ng-show="carForm.plateField.$dirty && carForm.plateField.$invalid" 
-				 	topic="Something went wrong!">
-					
-					<span ng-show="carForm.plateField.$error.required">
-						You must inform the plate of the car!
-					</span>
-
-					<span ng-show="carForm.plateField.$error.pattern">
-						The plate is invalid!
-					</span>
-				</alert>
-
-				<!-- <accordion>
-					<accordion-item title="MMM-8971">White - 10/10/2002 10:00</accordion-item>
-					<accordion-item title="MBD-8571">Black - 10/10/2002 10:00</accordion-item>
-					<accordion-item title="MMA-7871">Blue - 10/10/2002 10:00</accordion-item>
-				</accordion> -->
-
-
 				<input type="text" ng-model="criteria" placeholder="What are you loking for?" />
 
 				<table class="table" ng-show="cars.length > 0">
@@ -79,25 +59,6 @@
 				</table>
 				<div ng-hide="cars.length > 0">The parking lot is empty</div>
 
-				<!-- <form action="" method="POST" class="form-inline" role="form">
-					<div class="form-group">
-						<div class="col-xs-4">
-							<label class="sr-only" for="">Park</label>
-							<input type="text" placeholder="What's the plate?" class="form-control" ng-model="car.plate">
-						</div>
-						<div class="col-xs-5">
-							<label class="sr-only">Colors</label>
-							<select 
-								class="form-control"
-								ng-model="car.color"
-								ng-options="color for color in colors">Pick a color</select>
-						</div>
-						<div class="col-xs-3">
-							<button class="btn btn-success" type="button" ng-click="park(car)" ng-disabled="!car.plate || !car.color">Park</button>
-						</div>
-					</div>
-			
-				</form> -->
 				<br/><br/><br/><br/><br/>
 				
 				<form name="carForm" action="" method="POST" class="form-inline" role="form">
